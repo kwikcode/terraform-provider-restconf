@@ -2,7 +2,7 @@ project_name: terraform-provider-restconf
 builds:
   - main: ./main.go
     id: "terraform-provider-restconf"
-    goos:
+  goos:
     - openbsd
     - freebsd
     - windows
