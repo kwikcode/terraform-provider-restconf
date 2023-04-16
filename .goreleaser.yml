@@ -2,17 +2,17 @@ project_name: terraform-provider-restconf
 builds:
   - main: ./main.go
     id: "terraform-provider-restconf"
-  goos:
-    - openbsd
-    - freebsd
-    - windows
-    - linux
-    - darwin
-  goarch:
-    - amd64
-    - '386'
-    - arm
-    - arm64
+    goos:
+      - openbsd
+      - freebsd
+      - windows
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - '386'
+      - arm
+      - arm64
 archives:
   - format: zip
     name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}'
