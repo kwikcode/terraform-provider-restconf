@@ -23,15 +23,10 @@ func Provider() *schema.Provider {
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("RESTCONF_PASSWORD", ""),
 			},
-			"device_host": {
+			"host": {
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("RESTCONF_DEVICE_HOST", ""),
-			},
-			"device_port": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("RESTCONF_DEVICE_PORT", "443"),
+				DefaultFunc: schema.EnvDefaultFunc("RESTCONF_HOST", ""),
 			},
 		},
 		ConfigureContextFunc: providerConfigure,
@@ -41,10 +36,9 @@ func Provider() *schema.Provider {
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	username := d.Get("username").(string)
 	password := d.Get("password").(string)
-	deviceHost := d.Get("device_host").(string)
-	devicePort := d.Get("device_port").(string)
+	host := d.Get("host").(string)
 
-	client, err := NewClient(username, password, deviceHost, devicePort)
+	client, err := NewClient(username, password, host)
 	if err != nil {
 		return nil, diag.FromErr(err)
 	}
