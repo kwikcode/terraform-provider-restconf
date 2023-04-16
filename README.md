@@ -51,7 +51,7 @@ resource "restconf_config" "example" {
                 }
             })
     }
-    ```
+```
 
 ## Example 3 - Import NTP settings from a Cisco IOS XE device
 ```
