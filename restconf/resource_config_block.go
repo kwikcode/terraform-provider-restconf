@@ -24,7 +24,7 @@ func resourceConfigBlock() *schema.Resource {
 
 				diags := resourceConfigBlockRead(ctx, d, m)
 				if diags.HasError() {
-					return nil, fmt.Errorf("failed to import resource: %s", diags)
+					return nil, fmt.Errorf("failed to import resource: %s", diags[0].Summary)
 				}
 
 				return []*schema.ResourceData{d}, nil
