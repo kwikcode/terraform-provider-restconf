@@ -18,19 +18,19 @@ provider "restconf" {
 resource "restconf_config" "example" {
   path  = "/restconf/data/Cisco-IOS-XE-native:native/ntp"
   value = jsonencodejsonencode({
-            "Cisco-IOS-XE-native:ntp": {
-                "Cisco-IOS-XE-ntp:server": {
-                    "server-list": [
-                        {
-                            "ip-address": "ntp1.example.com"
-                        },
-                        {
-                            "ip-address": "ntp2.example.com"
-                        }
-                    ]
+                "Cisco-IOS-XE-native:ntp": {
+                    "Cisco-IOS-XE-ntp:server": {
+                        "server-list": [
+                            {
+                                "ip-address": "ntp1.example.com"
+                            },
+                            {
+                                "ip-address": "ntp2.example.com"
+                            }
+                        ]
+                    }
                 }
-            }
-        })
+           })
 }
 ```
 
