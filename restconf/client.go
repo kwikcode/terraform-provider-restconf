@@ -5,7 +5,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net"
 	"net/http"
 	"net/url"
@@ -103,7 +103,7 @@ func (c *Client) ReadConfigBlock(ctx context.Context, path string) (string, erro
 		return "", fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
 
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}
