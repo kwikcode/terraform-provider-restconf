@@ -97,9 +97,14 @@ func resourceConfigBlockRead(ctx context.Context, d *schema.ResourceData, m inte
 
 	// Decode and re-encode the stored configuration to ensure consistent formatting
 	var contentFormatted map[string]interface{}
-	if err := json.Unmarshal([]byte(content), &contentFormatted); err != nil {
-		return diag.FromErr(err)
+	if content == "" {
+		contentFormatted = make(map[string]interface{})
+	} else {
+		if err := json.Unmarshal([]byte(content), &contentFormatted); err != nil {
+			return diag.FromErr(err)
+		}
 	}
+
 	contentJson, err := json.Marshal(contentFormatted)
 	if err != nil {
 		return diag.FromErr(err)
