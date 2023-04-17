@@ -8,33 +8,16 @@ import (
 	"io"
 	"net"
 	"net/http"
-	"net/url"
 	"time"
 )
 
 type Client struct {
 	Username   string
 	Password   string
-	Host       string
 	HttpClient *http.Client
 }
 
-func NewClient(username, password, host string) (*Client, error) {
-	hostURL, err := url.Parse(host)
-	if err != nil {
-		return nil, err
-	}
-
-	if hostURL.Scheme == "" {
-		hostURL.Scheme = "https"
-	}
-
-	if hostURL.Port() == "" {
-		hostURL.Host = fmt.Sprintf("%s:%s", hostURL.Host, "443")
-	}
-
-	normalizedHost := fmt.Sprintf("%s://%s", hostURL.Scheme, hostURL.Host)
-
+func NewClient(username, password string) (*Client, error) {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
@@ -44,13 +27,12 @@ func NewClient(username, password, host string) (*Client, error) {
 
 	httpClient := &http.Client{
 		Transport: tr,
-		Timeout:   10 * time.Second,
+		Timeout:   60 * time.Second,
 	}
 
 	client := &Client{
 		Username:   username,
 		Password:   password,
-		Host:       normalizedHost,
 		HttpClient: httpClient,
 	}
 
@@ -58,10 +40,9 @@ func NewClient(username, password, host string) (*Client, error) {
 }
 
 func (c *Client) CreateConfigBlock(ctx context.Context, path, content string) error {
-	url := fmt.Sprintf("%s/%s", c.Host, path)
 	reqBody := []byte(content)
 
-	req, err := http.NewRequestWithContext(ctx, "PUT", url, bytes.NewReader(reqBody))
+	req, err := http.NewRequestWithContext(ctx, "PUT", path, bytes.NewReader(reqBody))
 	if err != nil {
 		return err
 	}
@@ -83,9 +64,7 @@ func (c *Client) CreateConfigBlock(ctx context.Context, path, content string) er
 }
 
 func (c *Client) ReadConfigBlock(ctx context.Context, path string) (string, error) {
-	url := fmt.Sprintf("%s/%s", c.Host, path)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", path, nil)
 	if err != nil {
 		return "", err
 	}
@@ -112,10 +91,9 @@ func (c *Client) ReadConfigBlock(ctx context.Context, path string) (string, erro
 }
 
 func (c *Client) UpdateConfigBlock(ctx context.Context, path, content string) error {
-	url := fmt.Sprintf("%s/%s", c.Host, path)
 	reqBody := []byte(content)
 
-	req, err := http.NewRequestWithContext(ctx, "PUT", url, bytes.NewReader(reqBody))
+	req, err := http.NewRequestWithContext(ctx, "PUT", path, bytes.NewReader(reqBody))
 	if err != nil {
 		return err
 	}
@@ -137,9 +115,7 @@ func (c *Client) UpdateConfigBlock(ctx context.Context, path, content string) er
 }
 
 func (c *Client) DeleteConfigBlock(ctx context.Context, path string) error {
-	url := fmt.Sprintf("%s/%s", c.Host, path)
-
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "DELETE", path, nil)
 	if err != nil {
 		return err
 	}

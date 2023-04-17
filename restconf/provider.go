@@ -23,11 +23,6 @@ func Provider() *schema.Provider {
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("RESTCONF_PASSWORD", ""),
 			},
-			"host": {
-				Type:        schema.TypeString,
-				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("RESTCONF_HOST", ""),
-			},
 		},
 		ConfigureContextFunc: providerConfigure,
 	}
@@ -36,9 +31,8 @@ func Provider() *schema.Provider {
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
 	username := d.Get("username").(string)
 	password := d.Get("password").(string)
-	host := d.Get("host").(string)
 
-	client, err := NewClient(username, password, host)
+	client, err := NewClient(username, password)
 	if err != nil {
 		return nil, diag.FromErr(err)
 	}
