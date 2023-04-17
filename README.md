@@ -12,7 +12,7 @@ Here are a few examples of how to use the RESTCONF provider in your Terraform co
 terraform {
   required_providers {
     restconf = {
-      source  = "github.com/kwikcode/restconf"
+      source  = "kwikcode/restconf"
     }
   }
 }
@@ -47,7 +47,7 @@ resource "restconf_config" "example" {
 terraform {
   required_providers {
     restconf = {
-      source  = "github.com/kwikcode/restconf"
+      source  = "kwikcode/restconf"
     }
   }
 }
