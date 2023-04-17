@@ -9,14 +9,21 @@ Here are a few examples of how to use the RESTCONF provider in your Terraform co
 ### Example 1: Update NTP settings on a Cisco IOS XE device
 
 ```hcl
+terraform {
+  required_providers {
+    restconf = {
+      source  = "github.com/kwikcode/restconf"
+    }
+  }
+}
+
 provider "restconf" {
-  host     = "https://192.0.2.1"
   username = "admin"
   password = "admin"
 }
 
 resource "restconf_config" "example" {
-  path  = "/restconf/data/Cisco-IOS-XE-native:native/ntp"
+  path  = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/ntp"
   value = jsonencodejsonencode({
                 "Cisco-IOS-XE-native:ntp": {
                     "Cisco-IOS-XE-ntp:server": {
@@ -37,14 +44,21 @@ resource "restconf_config" "example" {
 ## Example 2 - Update Banner settings on a Cisco IOS XE device
 
 ```hcl
+terraform {
+  required_providers {
+    restconf = {
+      source  = "github.com/kwikcode/restconf"
+    }
+  }
+}
+
 provider "restconf" {
-  host     = "https://192.0.2.1"
   username = "admin"
   password = "admin"
 }
 
 resource "restconf_config" "example" {
-    path  = "/restconf/data/Cisco-IOS-XE-native:native/banner"
+    path  = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/banner"
     value = jsonencodejsonencode({
                 "Cisco-IOS-XE-native:banner": {
                     "motd": "Welcome to the network!"
@@ -55,7 +69,7 @@ resource "restconf_config" "example" {
 
 ## Example 3 - Import NTP settings from a Cisco IOS XE device
 ```
-terraform import restconf_config_block.example /restconf/data/Cisco-IOS-XE-native:native/ntp
+terraform import restconf_config_block.example "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/ntp"
 ```
 
 ## Requirements

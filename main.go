@@ -5,8 +5,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/elongstreet88/terraform-provider-restconf/restconf"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+	"github.com/kwikcode/terraform-provider-restconf/restconf"
 )
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 	opts := &plugin.ServeOpts{ProviderFunc: restconf.Provider}
 
 	if debugMode {
-		err := plugin.Debug(context.Background(), "github.com/elongstreet88/restconf", opts)
+		err := plugin.Debug(context.Background(), "github.com/kwikcode/restconf", opts)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
