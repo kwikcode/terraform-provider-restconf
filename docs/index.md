@@ -82,7 +82,7 @@ terraform import restconf_config_block.example "https://192.0.2.1/restconf/data/
 
 ## Requirements
 
-- [Terraform](https://www.terraform.io/downloads.html) 0.12.x or later
+- [Terraform](https://www.terraform.io/downloads.html) 0.13.x or later
 - [Go](https://golang.org/doc/install) 1.16 or later (to build the provider plugin)
 - [GoReleaser](https://goreleaser.com/install/) (optional, for building releases)
 - [Delve](https://github.com/go-delve/delve/tree/master/Documentation/installation) (optional, for debugging)
