@@ -9,6 +9,9 @@ import (
 	"github.com/kwikcode/terraform-provider-restconf/restconf"
 )
 
+// Generate the Terraform provider documentation using `tfplugindocs`:
+//go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
+
 func main() {
 	var debugMode bool
 
