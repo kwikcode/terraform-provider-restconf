@@ -11,7 +11,11 @@ This resource provides an idempotent way to manage configuration blocks on netwo
 It will handle the creation, update and deletion of configuration blocks on network devices.
 You must import the resource before you can use it if it already exists on the device.
 
-### Example 1: Update NTP settings on a Cisco IOS XE device
+# Examples
+
+Here are a few examples of how to use the RESTCONF provider in your Terraform configuration:
+
+## Example 1: Update NTP settings on a Cisco IOS XE device
 
 ```hcl
 terraform {
