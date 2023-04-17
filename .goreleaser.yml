@@ -15,7 +15,7 @@ builds:
       - arm64
 archives:
   - format: zip
-    name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}'
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
 checksum:
   name_template: 'checksums.txt'
 snapshot:
