@@ -31,9 +31,9 @@ provider "restconf" {
   password = "admin"
 }
 
-resource "restconf_config" "example" {
-  path  = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/ntp"
-  value = jsonencodejsonencode({
+resource "restconf_config_block" "example" {
+  path    = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/ntp"
+  content = jsonencodejsonencode({
                 "Cisco-IOS-XE-native:ntp": {
                     "Cisco-IOS-XE-ntp:server": {
                         "server-list": [
@@ -66,9 +66,9 @@ provider "restconf" {
   password = "admin"
 }
 
-resource "restconf_config" "example" {
-    path  = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/banner"
-    value = jsonencodejsonencode({
+resource "restconf_config_block" "example" {
+    path    = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/banner"
+    content = jsonencodejsonencode({
                 "Cisco-IOS-XE-native:banner": {
                     "motd": "Welcome to the network!"
                 }
