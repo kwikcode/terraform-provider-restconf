@@ -33,7 +33,7 @@ provider "restconf" {
 
 resource "restconf_config" "example" {
   path  = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/ntp"
-  value = jsonencodejsonencode({
+  value = jsonencode({
                 "Cisco-IOS-XE-native:ntp": {
                     "Cisco-IOS-XE-ntp:server": {
                         "server-list": [
@@ -68,7 +68,7 @@ provider "restconf" {
 
 resource "restconf_config" "example" {
     path  = "https://192.0.2.1/restconf/data/Cisco-IOS-XE-native:native/banner"
-    value = jsonencodejsonencode({
+    value = jsonencode({
                 "Cisco-IOS-XE-native:banner": {
                     "motd": "Welcome to the network!"
                 }
